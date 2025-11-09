@@ -1,9 +1,4 @@
 ---
-title: 编码代理完全指南（Intro）
-colorSchema: auto
----
-
----
 src: ./title.md
 ---
 
@@ -66,4 +61,3 @@ src: ./live-example.md
 ---
 src: ./challenges.md
 ---
-
