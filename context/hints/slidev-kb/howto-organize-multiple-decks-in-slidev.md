@@ -1,105 +1,97 @@
 # 如何在一个仓库中组织多个 Slidev 幻灯片（多 Deck）
 
 本文给出在一个仓库中维护多份 Slidev 幻灯片（多个 deck）的组织方式与取舍建议，
-并附带可直接复用的构建与开发脚本示例。
+并附带可直接复用的开发/构建脚本示例。
 
-## 结论与建议（TL;DR）
+## 本仓库的约定（不污染根目录）
 
-- 两种方式都是被官方 CLI 支持的：
-  1) 单目录多 Markdown 文件（共享一套组件/样式/公共资源）
-  2) 每个 deck 一个子目录（每个目录内有自己的 `slides.md` 与资源）
-- 推荐：当你需要隔离资源、按 deck 定制主题/样式/配置或规模较大时，
-  采用“每个 deck 一个子目录”的方式，结构更清晰、冲突更少、扩展更方便。
-- 若多个 deck 极简且高度共享同一套组件/样式，且不需要按 deck 配置，
-  则“单目录多 Markdown 文件”也能满足需求，脚本更简洁。
+- 所有与 Slidev 相关的文件、依赖与产物，均放在 `slides/` 子目录层级内。
+- 不在项目根目录放置 Slidev 的依赖、脚本或构建产物。
+- 每个“主题（topic）”一个子目录；每个主题内采用“单目录 + 多个 Markdown 入口（Option 1）”。
 
-## 方式一：单目录 + 多个 Markdown 入口
-
-结构示例（入口都在同一目录下，共享 components/layouts/public 等）：
+推荐结构（以 `coding-agents` 主题为例）：
 
 ```text
 slides/
-  intro.md
-  advanced.md
-components/
-layouts/
-public/
-styles/
+  coding-agents/
+    main/                # 多个入口 Markdown（每个入口对应一个 deck）
+      intro.md
+      advanced.md
+    components/          # 仅作用于该主题的组件
+    layouts/             # 仅作用于该主题的布局
+    public/              # 仅作用于该主题的静态资源
+    setup/               # 预处理/扩展（可选）
+    styles/              # 主题样式（可选）
+    vite.config.ts       # 可选，仅影响该主题
+    dist/                # 构建输出目录（仅该主题）
 ```
 
-运行与构建（可用通配符一次性构建多个入口）：
+> 说明：上述结构将“多入口（多个 Markdown 文件）”放在 `main/` 下，
+> 其余 Slidev 约定目录（components/layouts/public/setup/styles 等）与之并列，
+> 完全局部化到该主题目录，不向根目录“泄漏”。
+
+## 开发与构建（使用 npx，或在主题目录内单独 package.json）
+
+方式 A：使用 `npx`（无需在仓库根目录安装依赖）
 
 ```bash
-# 开发其中一个 deck
-slidev slides/intro.md
+# 开发单个入口（在仓库根目录执行）
+npx slidev slides/coding-agents/main/intro.md
 
-# 一次性构建多个 deck（官方文档：Multiple Builds）
-slidev build slides/intro.md slides/advanced.md --out dist
-# 或使用 glob（shell 需支持）
-slidev build 'slides/*.md' --out dist
+# 批量构建该主题下所有入口（产物写回到该主题自身的 dist）
+npx slidev build 'slides/coding-agents/main/*.md' --out slides/coding-agents/dist
+
+# 子路径部署示例（如 GitHub Pages 下的 talks 子路径）
+npx slidev build slides/coding-agents/main/intro.md \
+  --out slides/coding-agents/dist/intro \
+  --base /talks/coding-agents/intro/
 ```
 
-package.json 脚本示例：
+方式 B：在“主题目录”内单独管理依赖（可选）
 
 ```json
+// slides/coding-agents/package.json（可选）
 {
+  "private": true,
+  "devDependencies": { "@slidev/cli": "^0.52.0" },
   "scripts": {
-    "slides:dev:intro": "slidev slides/intro.md",
-    "slides:build:all": "slidev build 'slides/*.md' --out dist"
+    "dev:intro": "slidev main/intro.md",
+    "build:all": "slidev build 'main/*.md' --out dist"
   }
 }
 ```
 
-何时选择：deck 很少且共享一切，几乎不做按 deck 的差异化配置。
-
-## 方式二：每个 deck 单独子目录（推荐）
-
-结构示例（每个 deck 自己的目录与约定文件/文件夹）：
-
-```text
-slides/
-  deck-a/
-    slides.md
-    components/
-    layouts/
-    public/
-    setup/
-    styles/
-    vite.config.ts   # 可选，仅影响该 deck
-  deck-b/
-    slides.md
-```
-
-运行与构建：
+在主题目录内运行：
 
 ```bash
-# 开发某个 deck
-slidev slides/deck-a/slides.md
-
-# 批量构建所有 deck
-slidev build 'slides/*/slides.md' --out dist
-
-# 部署到子路径时（如 GitHub Pages），需指定 base
-slidev build slides/deck-a/slides.md --out dist/deck-a --base /talks/deck-a/
+cd slides/coding-agents
+npm install
+npm run dev:intro
+npm run build:all
 ```
 
-package.json 脚本示例：
+## 多主题场景
 
-```json
-{
-  "scripts": {
-    "slides:dev:a": "slidev slides/deck-a/slides.md",
-    "slides:build:a": "slidev build slides/deck-a/slides.md --out dist/deck-a",
-    "slides:build:all": "slidev build 'slides/*/slides.md' --out dist"
-  }
-}
+当存在多个主题目录（例如 `slides/ai-agents`、`slides/prompt-engineering`）时，
+可以按主题分别构建，避免产物混杂在仓库根目录：
+
+```bash
+# 从仓库根目录遍历每个主题，构建其 main 下的所有入口
+for t in slides/*; do \
+  if [ -d "$t/main" ]; then \
+    npx slidev build "$t"/main/*.md --out "$t"/dist; \
+  fi; \
+done
 ```
 
-为什么更推荐：
-- 资源隔离：每个 deck 自有 `public/`、`components/`，避免命名冲突。
-- 配置灵活：按 deck 添加 `vite.config.ts`、主题、样式覆盖与插件。
-- 部署方便：不同 deck 可以输出到不同目录、使用不同 `--base`。
-- 规模友好：多人协作、长期维护更清晰。
+## 何时考虑“每个 deck 一个子目录（Option 2）”
+
+- 当单个主题内部的 deck 需要完全不同的组件/布局/插件，且难以共享；
+- 当构建逻辑需要严格隔离每个 deck 的配置与依赖；
+- 或者历史原因已按 deck 拆分且成本较高时。
+
+对于本仓库，优先采用“每主题一个目录 + 该目录下多入口 Markdown（Option 1）”方式，
+保证简洁并与“不要污染根目录”的约束一致。
 
 ## 参考与来源（官方文档）
 - Multiple Builds（一次构建多个入口）：
@@ -109,7 +101,5 @@ package.json 脚本示例：
 - 目录结构约定（components/layouts/public/setup/styles 等）：
   https://sli.dev/custom/directory-structure
 
-> 备注：官方 CLI 支持把入口指向任意位置的 Markdown 文件，
-> 因此将 deck 放在子目录是实践中常见且可行的组织方式。
-> 少数版本曾出现入口不在项目根目录时 `public/` 解析的小问题，
-> 将静态资源放在每个 deck 自己的 `public/` 可规避大多数坑。
+> 备注：官方 CLI 支持把入口指向任意位置的 Markdown 文件；
+> 将入口与约定目录都放在 `slides/<topic>/` 下，是实践中常见且稳妥的组织方式。
