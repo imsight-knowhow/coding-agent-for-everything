@@ -2,7 +2,7 @@
 
 关注任务定义与结果校验，降低幻觉与偏差。
 
-```mermaid
+```mermaid {scale: 0.5}
 %%{init: {'theme':'base', 'themeVariables': {'fontSize':'20px'}}}%%
 graph TB
     Human["<b>👤 人类开发者</b><br/>定义需求<br/>验证结果"]
