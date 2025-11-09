@@ -1,0 +1,17 @@
+{
+  "name": "coding-agent-for-everything",
+  "private": true,
+  "description": "中文向：使用 Slidev 在 slides/ 子目录组织与构建演示文稿",
+  "scripts": {
+    "slides:dev:intro": "slidev slides/coding-agents-intro/slides.md",
+    "slides:build:intro": "slidev build slides/coding-agents-intro/slides.md --out dist/coding-agents-intro",
+    "slides:build:all": "slidev build 'slides/*/slides.md' --out dist"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^0.52.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+
