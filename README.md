@@ -37,6 +37,20 @@ coding-agent-for-everything/
   - `pixi run python -m code_them_all`（如项目内提供相应入口）
 - TypeScript/JavaScript 相关内容请按各子目录的 README 说明运行。
 
+### Slidev 幻灯片组织（多 deck）
+
+- 本项目偏好“单目录 + 多个 Markdown 入口”的方式组织多份幻灯片（简单场景足够且复用性高）。
+- 推荐布局（示例）：
+  ```
+  slides/
+    intro.md
+    advanced.md
+  ```
+- 开发与构建示例（Node ≥ 18）：
+  - 开发某个入口：`npx slidev slides/intro.md`
+  - 批量构建：`npx slidev build 'slides/*.md' --out dist`
+- 详见：`context/hints/slidev-kb/howto-organize-multiple-decks-in-slidev.md`
+
 ## 内容范围
 
 ### 软件开发场景
