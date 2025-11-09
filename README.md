@@ -28,6 +28,15 @@ coding-agent-for-everything/
 └── README.md          # 项目说明文档
 ```
 
+## 开发与运行
+
+- 语言栈：Python 与 TypeScript/JavaScript。
+- Python 环境由 Pixi 管理，请使用 `pixi run` 执行所有 Python 脚本，避免使用系统 `python`。
+- 示例：
+  - `pixi run python -c "print('hello')"`
+  - `pixi run python -m code_them_all`（如项目内提供相应入口）
+- TypeScript/JavaScript 相关内容请按各子目录的 README 说明运行。
+
 ## 内容范围
 
 ### 软件开发场景

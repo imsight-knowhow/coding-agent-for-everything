@@ -1,0 +1,132 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+/pixi.lock
+
+# agent-specific files
+# create these using speckit commands
+/.claude
+/.codex
+/.github
+
+# Python 常见忽略项
+# 字节码与缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C 扩展
+*.so
+
+# 打包/发布产物
+.Python
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.spec
+*.manifest
+
+# 安装/日志
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 测试与覆盖率
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+nosetests.xml
+*.cover
+*.py,cover
+htmlcov/
+.hypothesis/
+.pytest_cache/
+.cache
+
+# 文档构建
+docs/_build/
+
+# 翻译文件
+*.mo
+*.pot
+
+# Django/Flask 等常见框架
+*.log
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy/
+
+# PyBuilder
+target/
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# 虚拟环境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PEP 582; 如 PDM
+__pypackages__/
+
+# 类型检查与静态分析
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Cython 调试
+cython_debug/
+
+# Node / TypeScript 常见忽略项
+node_modules/
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.eslintcache
+.parcel-cache/
+.rpt2_cache/
+.tsbuildinfo
+tsconfig.tsbuildinfo
+coverage/
+.nyc_output/
+.turbo/
+.vite/
+.swc/
+.svelte-kit/
+.next/
+.nuxt/
+.angular/
+.serverless/
+.vercel/
+out/
+lib/
+storybook-static/
