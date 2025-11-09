@@ -2,9 +2,9 @@
 
 关注任务定义与结果校验，降低幻觉与偏差。
 
-```mermaid {scale: 0.5}
+```mermaid {scale: 0.7}
 %%{init: {'theme':'base', 'themeVariables': {'fontSize':'20px'}}}%%
-graph TB
+graph LR
     Human["<b>👤 人类开发者</b><br/>定义需求<br/>验证结果"]
     Spec["<b>📋 软件规格</b><br/>需求文档<br/>技术标准"]
     Agent["<b>🤖 AI 编码代理</b><br/>理解任务<br/>生成代码<br/>执行操作"]
@@ -28,9 +28,11 @@ graph TB
     class Human,Agent loopStyle
 ```
 
-## 核心要点
+<div class="h-7"></div>
 
-- **任务定义**：人类明确指定目标，AI 不自行决定"做什么"
-- **结果校验**：人类审查输出，防止幻觉与错误蔓延
-- **规格参考**：软件规格作为共同的真实来源（Source of Truth）
-- **闭环反馈**：人类反馈帮助 AI 调整，持续改进质量
+### 人类在回路中的作用：
+<div class="h-3"></div>
+
+- **任务定义**：明确任务目标、输入输出要求和成功标准。
+- **结果校验**：审查 AI 生成的代码，确保其符合预期并无误。
+- **反馈循环**：提供反馈以改进 AI 代理的性能和准确性。

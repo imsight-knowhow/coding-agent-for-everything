@@ -24,27 +24,7 @@ src: ./new-paradigm.md
 ---
 
 ---
-src: ./trends.md
----
-
----
-src: ./what-it-means-for-programmers.md
----
-
----
 src: ./applications.md
----
-
----
-src: ./travel-agent.md
----
-
----
-src: ./patent-writing-agent.md
----
-
----
-src: ./paper-survey-agent.md
 ---
 
 ---
@@ -52,9 +32,5 @@ src: ./past-projects.md
 ---
 
 ---
-src: ./live-example.md
----
-
----
-src: ./challenges.md
+src: ./thank-you.md
 ---
