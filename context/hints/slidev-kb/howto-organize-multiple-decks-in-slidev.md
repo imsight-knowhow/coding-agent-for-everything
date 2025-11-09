@@ -12,6 +12,7 @@
 - 清单位置：所有清单/清单锁文件（如 `pyproject.toml`、`package.json`、`pixi.lock`）集中在仓库根目录，便于统一 CI/CD 与开发者认知。
 - 代码与资产：各自脚本与资源放在子目录中；Slidev 的 Markdown、组件、布局与静态资源全部位于 `slides/` 之下，不在根目录堆放幻灯片相关文件与产物。
 - 多主题（topic）组织：每个“主题”一个子目录；每个主题内采用“单目录 + 多个 Markdown 入口（Option 1）”。
+- 目录保留：`src/` 目录专供 Python 包源码使用（例如 `src/code_them_all`）；TS/JS（含 Slidev）不得在 `src/` 下新增或修改内容，避免命名冲突与打包混淆。其他 TS/JS 工具/脚本请放在各自子目录（如 `slides/`、`tools/js/`、`web/` 等，按需自定）。
 
 推荐结构（使用占位名 `<topic-a>`、`<topic-b>` 展示多个主题）：
 
