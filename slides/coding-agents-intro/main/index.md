@@ -6,9 +6,6 @@ src: ./title.md
 src: ./intro.md
 ---
 
----
-src: ./history.md
----
 
 ---
 src: ./hypes.md
