@@ -1,9 +1,9 @@
 ---
 layout: cover
-title: 编码代理完全指南（Intro）
+title: 编程解万难
 colorSchema: auto
 ---
 
-# 编码代理完全指南
+# 编程解万难
 
-副标题：从理念到实践的入门
+如何用coding agent提高工作效率
