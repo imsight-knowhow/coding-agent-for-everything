@@ -51,6 +51,7 @@ coding-agent-for-everything/
   slides/
     <topic-a>/
       main/
+        index.md        # 聚合入口（通过 src 引入各分节）
         intro.md
         advanced.md
       components/
@@ -58,16 +59,25 @@ coding-agent-for-everything/
       dist/
     <topic-b>/
       main/
+        index.md
         overview.md
         deep-dive.md
       components/
       public/
       dist/
   ```
-- 开发与构建示例（Node ≥ 18）：
-  - 开发某个入口：`npx slidev slides/<topic-a>/main/intro.md`
+- 预览与构建（Node ≥ 18）：
+  - 预览（推荐聚合入口）：`npx slidev slides/<topic-a>/main/index.md`
+  - 预览（仓库示例）：`npm run slides:dev:intro`
   - 构建该主题全部入口：`npx slidev build 'slides/<topic-a>/main/*.md' --out slides/<topic-a>/dist`
 - 详见：`context/hints/slidev-kb/howto-organize-multiple-decks-in-slidev.md`
+
+### 预览 Slidev 幻灯片（快速上手）
+
+1) 安装依赖（首次执行）：`npm install`
+2) 预览示例主题：`npm run slides:dev:intro`
+3) 打开浏览器访问：`http://localhost:3030/`（或终端提示的链接）。
+   - 常用快捷键：`o` 打开、`r` 重启、`q` 退出；演讲者视图：`/presenter`。
 
 ## 内容范围
 
