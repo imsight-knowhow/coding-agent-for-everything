@@ -3,11 +3,15 @@
 本文给出在一个仓库中维护多份 Slidev 幻灯片（多个 deck）的组织方式与取舍建议，
 并附带可直接复用的开发/构建脚本示例。
 
-## 本仓库的约定（不污染根目录）
+## 项目布局与理由（Python + TS/JS，根清单，子目录代码）
 
-- 所有与 Slidev 相关的文件、依赖与产物，均放在 `slides/` 子目录层级内。
-- 不在项目根目录放置 Slidev 的依赖、脚本或构建产物。
-- 每个“主题（topic）”一个子目录；每个主题内采用“单目录 + 多个 Markdown 入口（Option 1）”。
+- 技术栈：仓库同时包含 Python 与 TypeScript/JavaScript。
+- 管理方式：
+  - Python 采用 Pixi（使用 `pyproject.toml`，通过 `pixi run` 运行脚本）。
+  - TS/JS 采用 Node.js（使用根级 `package.json` 管理依赖与脚本，Node ≥ 18）。
+- 清单位置：所有清单/清单锁文件（如 `pyproject.toml`、`package.json`、`pixi.lock`）集中在仓库根目录，便于统一 CI/CD 与开发者认知。
+- 代码与资产：各自脚本与资源放在子目录中；Slidev 的 Markdown、组件、布局与静态资源全部位于 `slides/` 之下，不在根目录堆放幻灯片相关文件与产物。
+- 多主题（topic）组织：每个“主题”一个子目录；每个主题内采用“单目录 + 多个 Markdown 入口（Option 1）”。
 
 推荐结构（使用占位名 `<topic-a>`、`<topic-b>` 展示多个主题）：
 
@@ -39,7 +43,7 @@ slides/
 
 ## 开发与构建（使用 npx，或在主题目录内单独 package.json）
 
-方式 A：使用 `npx`（无需在仓库根目录安装依赖）
+方式 A：使用 `npx`（根级 `package.json` 管理依赖，或临时使用 npx）
 
 ```bash
 # 开发单个入口（在仓库根目录执行）
@@ -54,7 +58,7 @@ npx slidev build slides/<topic-a>/main/intro.md \
   --base /talks/<topic-a>/intro/
 ```
 
-方式 B：在“主题目录”内单独管理依赖（可选）
+方式 B：在“主题目录”内单独管理依赖（可选，不是本项目默认）
 
 ```json
 // slides/<topic-a>/package.json（可选）
@@ -89,6 +93,43 @@ for t in slides/*; do \
     npx slidev build "$t"/main/*.md --out "$t"/dist; \
   fi; \
 done
+
+或使用单条命令（将所有入口输出到 `slides/dist`，每个入口生成一个子目录）：
+
+```bash
+npx slidev build 'slides/*/main/*.md' --out slides/dist
+```
+
+> 注意：为保持根目录整洁，建议输出到 `slides/<topic>/dist` 或集中到 `slides/dist`，而非仓库根的 `dist/`。
+
+## 资产与 public/ 提示（合并自“子目录组织”指南）
+
+- 引用相对路径图片（如 `![alt](./img.png)`）会由 Vite 处理并打包，通常“开箱即用”。
+- `public/` 下的文件会被原样拷贝并在开发/构建时挂载到根路径 `/`；为避免冲突，请使用“每主题一个 public/”。
+- 少数场景下，front‑matter 内的相对路径不会在构建时重写，建议改用 Markdown 引用或通过组件 props 传入。
+
+## 每主题的 Vite 定制（可选）
+
+某些主题需要自定义别名或插件时，可在该主题目录内放置 `vite.config.ts`，仅对该主题生效：
+
+```ts
+// slides/<topic-a>/vite.config.ts
+import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@shared': fileURLToPath(new URL('../_shared', import.meta.url))
+    }
+  }
+})
+```
+
+## 已知边界（来自官方 issue，总结）
+
+- 指向“兄弟路径”的入口在部分版本的 dev 服务中可能出现解析问题；建议将入口放在主题子目录内，或在该目录内运行命令。
+- 入口不在项目根目录时，历史版本有过 `public/` 解析异常；将静态资源放在每主题 `public/` 通常可规避。
 ```
 
 ## 何时考虑“每个 deck 一个子目录（Option 2）”
@@ -109,4 +150,5 @@ done
   https://sli.dev/custom/directory-structure
 
 > 备注：官方 CLI 支持把入口指向任意位置的 Markdown 文件；
-> 将入口与约定目录都放在 `slides/<topic>/` 下，是实践中常见且稳妥的组织方式。
+> 将入口与约定目录都放在 `slides/<topic>/` 下，根目录仅放置清单与通用脚本，
+> 是实践中常见且稳妥的组织方式（便于 Python/Node 双栈协作与 CI/CD）。
