@@ -3,6 +3,9 @@
 !.pixi/config.toml
 /pixi.lock
 
+# macOS
+.DS_Store
+
 # agent-specific files
 # create these using speckit commands
 /.claude
