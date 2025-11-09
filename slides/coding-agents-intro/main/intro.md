@@ -1,19 +1,29 @@
-# 简介：编码代理发展脉络（按时间顺序）
+# 简介：编码代理发展脉络
 
-1. Chatbot（2022）：对话式辅助写/解读代码，降低自然语言编程门槛。
-2. GitHub Copilot（2021–2022）：IDE 内联结对编程，自动补全与片段生成。
-3. Cursor（2023 起）：基于 VS Code 的 AI IDE，支持对话改写与项目级上下文。
-4. Cline（2024–2025）：VS Code 开源自主代理，计划/编辑/命令执行一体化，权限把控。
-5. Claude Code（2024–2025）：面向工程的工具调用编码体验，整合终端与文件编辑。
-6. Codex CLI（2025）：本地终端编码代理，读取/修改/运行代码并支持安全沙箱。
+- **Chatbot（你问我答）**：仅 Prompt/Response，对话里产出代码，需人工复制粘贴进工程。
+- **GitHub Copilot（你一行我一行）**：IDE 内联补全，把"复制粘贴"缩短为"就地补齐"。
+- **Cursor （你一行我一段）**：多行/乱序补全与任务式对话，引入 Composer 做跨文件改动。
+- **Cline （你一句我做完）**：全代理化、以提示为中心、多文件编辑、命令执行。
+- **Claude Code （万能乙方）**：接管 CLI 与文件编辑，接受复杂的需求，像乙方一样一次做完整个工程。
+- **Codex CLI （金牌乙方）**：OpenAI 的对应方案，模型擅长算法理解，奥赛金牌选手。
 
----
+<br/>
 
-# 能力演进：相对前代的提升
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'fontSize':'24px'}}}%%
+graph LR
+    A["<b>Chatbot</b><br/>2022<br/>对话式代码辅助"] --> B["<b>GitHub Copilot</b><br/>2021-2022<br/>IDE内联补全"]
+    B --> C["<b>Cursor</b><br/>2023<br/>AI IDE + 项目级别的上下文"]
+    C --> D["<b>Cline</b><br/>2024-2025<br/>自主代理"]
+    D --> E["<b>终端编码代理</b><br/>2024-2025<br/>CLI + 文件 + 沙箱"]
+    E --> F["<b>Claude Code</b><br/>Anthropic"]
+    E --> G["<b>Codex CLI</b><br/>OpenAI"]
 
-- Chatbot：仅 Prompt/Response，对话里产出代码，需人工复制粘贴进工程。
-- GitHub Copilot：IDE 内联补全，把“复制粘贴”缩短为“就地补齐”。
-- Cursor：多行/乱序补全与任务式对话；引入 Composer 做跨文件改动。
-- Cline：全代理化、以提示为中心；多文件编辑、命令执行与浏览默认化。
-- Claude Code：接管 CLI 与文件编辑，真正像助理一样按提示端到端完成工作。
-- Codex CLI：OpenAI 的对应方案，本地终端代理，结合最新模型能力与安全沙箱/审批。
+    style A fill:#e1f5ff
+    style B fill:#b3e5fc
+    style C fill:#81d4fa
+    style D fill:#4fc3f7
+    style E fill:#29b6f6
+    style F fill:#03a9f4
+    style G fill:#03a9f4
+```

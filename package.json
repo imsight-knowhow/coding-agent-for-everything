@@ -8,7 +8,8 @@
     "slides:build:all": "slidev build 'slides/*/main/index.md' --out slides/dist"
   },
   "devDependencies": {
-    "@slidev/cli": "^0.52.0"
+    "@slidev/cli": "^52.8.0",
+    "@slidev/theme-default": "^0.25.0"
   },
   "engines": {
     "node": ">=18"
