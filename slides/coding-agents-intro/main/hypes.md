@@ -75,7 +75,11 @@
   <br/>[[Index.dev - Statistics]](https://www.index.dev/blog/ai-agents-statistics)
 - **效果明显**：26% 生产力提升有真实数据支持
   <br/>[[Pragmatic Coders - 200+ Statistics]](https://www.pragmaticcoders.com/resources/ai-agent-statistics)
+- **成功关键**：购买专业工具成功率 67%，自研仅 33%；需赋权一线经理推动，而非依赖中央 AI 实验室
+  <br/>[[Fortune - MIT Report Analysis]](https://fortune.com/2025/08/21/an-mit-report-that-95-of-ai-pilots-fail-spooked-investors-but-the-reason-why-those-pilots-failed-is-what-should-make-the-c-suite-anxious/)
 - **仍在探索**：可靠性、泛化能力、长期自主性仍受限
   <br/>[[Alvarez & Marsal - Market Outlook]](https://www.alvarezandmarsal.com/thought-leadership/demystifying-ai-agents-in-2025-separating-hype-from-reality-and-navigating-market-outlook)
 - **工具选择**：没有绝对最佳，取决于工作流偏好（IDE vs CLI）
   <br/>[[Artificial Analysis - Comparison]](https://artificialanalysis.ai/insights/coding-agents-comparison)
+- **MIT 警告**：95% 的 GenAI 试点项目失败，因为**企业回避必要的组织变革**
+  <br/>[[MIT NANDA - GenAI Divide Report 2025]](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/)
