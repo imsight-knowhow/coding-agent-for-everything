@@ -37,18 +37,36 @@ coding-agent-for-everything/
   - `pixi run python -m code_them_all`（如项目内提供相应入口）
 - TypeScript/JavaScript 相关内容请按各子目录的 README 说明运行。
 
+### 目录约定
+
+- `src/` 仅用于 Python 包源码（例如 `src/code_them_all`）；TS/JS（含 Slidev）不得使用该目录。
+- 根目录用于集中清单与脚本（如 `pyproject.toml`、`package.json`、`pixi.lock`），避免在根放置幻灯片源码与构建产物。
+- 幻灯片源码与资产放在 `slides/` 下；构建产物建议输出到 `slides/<topic>/dist` 或集中到 `slides/dist`。
+
 ### Slidev 幻灯片组织（多 deck）
 
-- 本项目偏好“单目录 + 多个 Markdown 入口”的方式组织多份幻灯片（简单场景足够且复用性高）。
-- 推荐布局（示例）：
+- 采用“每个主题一个子目录 + 该主题内多入口 Markdown（Option 1）”的方式组织。
+- 推荐布局（占位名示例）：
   ```
   slides/
-    intro.md
-    advanced.md
+    <topic-a>/
+      main/
+        intro.md
+        advanced.md
+      components/
+      public/
+      dist/
+    <topic-b>/
+      main/
+        overview.md
+        deep-dive.md
+      components/
+      public/
+      dist/
   ```
 - 开发与构建示例（Node ≥ 18）：
-  - 开发某个入口：`npx slidev slides/intro.md`
-  - 批量构建：`npx slidev build 'slides/*.md' --out dist`
+  - 开发某个入口：`npx slidev slides/<topic-a>/main/intro.md`
+  - 构建该主题全部入口：`npx slidev build 'slides/<topic-a>/main/*.md' --out slides/<topic-a>/dist`
 - 详见：`context/hints/slidev-kb/howto-organize-multiple-decks-in-slidev.md`
 
 ## 内容范围
