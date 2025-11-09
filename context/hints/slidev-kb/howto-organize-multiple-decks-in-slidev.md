@@ -9,11 +9,11 @@
 - 不在项目根目录放置 Slidev 的依赖、脚本或构建产物。
 - 每个“主题（topic）”一个子目录；每个主题内采用“单目录 + 多个 Markdown 入口（Option 1）”。
 
-推荐结构（以 `coding-agents` 主题为例）：
+推荐结构（使用占位名 `<topic-a>`、`<topic-b>` 展示多个主题）：
 
 ```text
 slides/
-  coding-agents/
+  <topic-a>/
     main/                # 多个入口 Markdown（每个入口对应一个 deck）
       intro.md
       advanced.md
@@ -24,6 +24,13 @@ slides/
     styles/              # 主题样式（可选）
     vite.config.ts       # 可选，仅影响该主题
     dist/                # 构建输出目录（仅该主题）
+  <topic-b>/
+    main/
+      overview.md
+      deep-dive.md
+    components/
+    public/
+    dist/
 ```
 
 > 说明：上述结构将“多入口（多个 Markdown 文件）”放在 `main/` 下，
@@ -36,21 +43,21 @@ slides/
 
 ```bash
 # 开发单个入口（在仓库根目录执行）
-npx slidev slides/coding-agents/main/intro.md
+npx slidev slides/<topic-a>/main/intro.md
 
 # 批量构建该主题下所有入口（产物写回到该主题自身的 dist）
-npx slidev build 'slides/coding-agents/main/*.md' --out slides/coding-agents/dist
+npx slidev build 'slides/<topic-a>/main/*.md' --out slides/<topic-a>/dist
 
 # 子路径部署示例（如 GitHub Pages 下的 talks 子路径）
-npx slidev build slides/coding-agents/main/intro.md \
-  --out slides/coding-agents/dist/intro \
-  --base /talks/coding-agents/intro/
+npx slidev build slides/<topic-a>/main/intro.md \
+  --out slides/<topic-a>/dist/intro \
+  --base /talks/<topic-a>/intro/
 ```
 
 方式 B：在“主题目录”内单独管理依赖（可选）
 
 ```json
-// slides/coding-agents/package.json（可选）
+// slides/<topic-a>/package.json（可选）
 {
   "private": true,
   "devDependencies": { "@slidev/cli": "^0.52.0" },
@@ -64,7 +71,7 @@ npx slidev build slides/coding-agents/main/intro.md \
 在主题目录内运行：
 
 ```bash
-cd slides/coding-agents
+cd slides/<topic-a>
 npm install
 npm run dev:intro
 npm run build:all
@@ -72,7 +79,7 @@ npm run build:all
 
 ## 多主题场景
 
-当存在多个主题目录（例如 `slides/ai-agents`、`slides/prompt-engineering`）时，
+当存在多个主题目录（例如 `slides/<topic-a>`、`slides/<topic-b>`）时，
 可以按主题分别构建，避免产物混杂在仓库根目录：
 
 ```bash
