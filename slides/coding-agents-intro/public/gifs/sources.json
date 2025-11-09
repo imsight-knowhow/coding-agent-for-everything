@@ -1,0 +1,33 @@
+{
+  "chatbot": {
+    "desc": "ChatGPT coding/chat demo GIF",
+    "url": null,
+    "status": "todo"
+  },
+  "github_copilot": {
+    "desc": "Copilot demo GIF (Neon MCP server article)",
+    "url": "https://raw.githubusercontent.com/neondatabase/website/main/public/docs/guides/github-copilot-neon-mcp-server/github-copilot-with-neon-mcp-server-demo.gif",
+    "file": "/gifs/github-copilot-demo.gif",
+    "status": "downloaded"
+  },
+  "cursor": {
+    "desc": "Cursor Composer / multi-file editing GIF",
+    "url": null,
+    "status": "todo"
+  },
+  "cline": {
+    "desc": "Cline agent workflow GIF",
+    "url": null,
+    "status": "todo"
+  },
+  "claude_code": {
+    "desc": "Claude Code terminal + file editing GIF",
+    "url": null,
+    "status": "todo"
+  },
+  "codex_cli": {
+    "desc": "OpenAI Codex CLI animated GIF",
+    "url": null,
+    "status": "todo"
+  }
+}
