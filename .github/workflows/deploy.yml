@@ -39,10 +39,11 @@ jobs:
             BASE="/$REPO/"
           fi
           echo "Using base: $BASE"
+          OUT_DIR="$GITHUB_WORKSPACE/dist"
           npx slidev build slides/coding-agents-intro/main/index.md \
             --base "$BASE" \
-            --out dist
-          echo "Built files:" && ls -la dist | sed -n '1,200p'
+            --out "$OUT_DIR"
+          echo "Built files:" && ls -la "$OUT_DIR" | sed -n '1,200p'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
