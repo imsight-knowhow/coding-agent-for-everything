@@ -54,11 +54,75 @@ npm run slides:build:intro
   - 已配置工作流 `.github/workflows/deploy.yml`，推送到 `main` 自动发布
   - 线上地址：`https://imsight-knowhow.github.io/coding-agent-for-everything/`
 
-## 相关目录
+## 目录结构（Depth=2）
 
-- `slides/` 幻灯片源码与静态资源
-- `slides/coding-agents-intro/main/` 主题入口与各分节 Markdown
-- `slides/coding-agents-intro/public/` 公开静态资源（如 GIF）
+```
+coding-agent-for-everything/
+├── .github/
+│   ├── LINE_ENDINGS.md
+│   └── workflows/
+├── .pixi/
+│   └── envs/
+├── .specify/
+│   ├── memory/
+│   ├── scripts/
+│   └── templates/
+├── .vscode/
+│   └── settings.json
+├── AGENTS.md
+├── CLAUDE.md
+├── README.md
+├── context/
+│   ├── design/
+│   ├── hints/
+│   ├── instructions/
+│   ├── plans/
+│   ├── refcode/
+│   ├── roles/
+│   ├── summaries/
+│   ├── tasks/
+│   └── tools/
+├── examples/
+│   └── README.md
+├── magic-context/
+│   ├── blender-plugin/
+│   ├── general/
+│   ├── instructions/
+│   ├── mcp-dev/
+│   ├── roles/
+│   ├── scripts/
+│   └── speckit/
+├── resources/
+│   └── README.md
+├── slides/
+│   ├── README.md
+│   └── coding-agents-intro/
+├── src/
+│   └── code_them_all/
+├── talks/
+│   └── README.md
+├── tutorials/
+│   └── README.md
+├── normalize-line-endings.sh
+├── setup-envs.sh
+├── start-slidev.sh
+├── package.json
+├── package-lock.json
+├── pixi.lock
+└── pyproject.toml
+```
+
+说明：
+- `slides/`：Slidev 幻灯片源码与资产；`slides/coding-agents-intro/` 为本主题，入口在 `main/index.md`。
+- `.github/workflows/`：GitHub Pages 自动发布工作流（push 到 `main` 即发布）。
+- `start-slidev.sh`：本地预览便捷脚本（支持多主题/端口参数）。
+- `context/`：规格、提示、计划、角色等资料库，用于组织与沉淀方法论。
+- `.specify/`：SpecKit 相关脚本与缓存，支撑“规范驱动开发”的流程。
+- `magic-context/`：外部上下文与脚本集合（子仓库/子模块风格，用于复用）。
+- `src/`：Python 包示例位置（若有 Python 代码）。
+- `resources/`、`examples/`、`talks/`、`tutorials/`：资源、示例、演讲稿与教程文档。
+- `package.json`：包含 Slidev 的开发/构建脚本；`pyproject.toml`、`pixi.lock` 为 Python/Pixi 清单。
+- `normalize-line-endings.sh`：统一行尾脚本；跨平台规范见 `.github/LINE_ENDINGS.md`。
 
 ## 跨平台与行尾规范
 
