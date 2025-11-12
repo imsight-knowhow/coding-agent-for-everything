@@ -54,75 +54,30 @@ npm run slides:build:intro
   - 已配置工作流 `.github/workflows/deploy.yml`，推送到 `main` 自动发布
   - 线上地址：`https://imsight-knowhow.github.io/coding-agent-for-everything/`
 
-## 目录结构（Depth=2）
+## 目录结构
 
 ```
 coding-agent-for-everything/
-├── .github/
-│   ├── LINE_ENDINGS.md
-│   └── workflows/
-├── .pixi/
-│   └── envs/
-├── .specify/
-│   ├── memory/
-│   ├── scripts/
-│   └── templates/
-├── .vscode/
-│   └── settings.json
-├── AGENTS.md
-├── CLAUDE.md
-├── README.md
-├── context/
-│   ├── design/
-│   ├── hints/
-│   ├── instructions/
-│   ├── plans/
-│   ├── refcode/
-│   ├── roles/
-│   ├── summaries/
-│   ├── tasks/
-│   └── tools/
-├── examples/
-│   └── README.md
-├── magic-context/
-│   ├── blender-plugin/
-│   ├── general/
-│   ├── instructions/
-│   ├── mcp-dev/
-│   ├── roles/
-│   ├── scripts/
-│   └── speckit/
-├── resources/
-│   └── README.md
-├── slides/
-│   ├── README.md
-│   └── coding-agents-intro/
-├── src/
-│   └── code_them_all/
-├── talks/
-│   └── README.md
-├── tutorials/
-│   └── README.md
-├── normalize-line-endings.sh
-├── setup-envs.sh
-├── start-slidev.sh
-├── package.json
-├── package-lock.json
-├── pixi.lock
-└── pyproject.toml
+├── .specify/             # SpecKit 配置、脚本与模板
+├── .vscode/              # VS Code 编辑器配置
+├── context/              # AI 辅助开发的上下文资料库（规格、计划、角色、提示等）
+├── examples/             # 可运行代码示例
+├── magic-context/        # 可复用的 AI 提示模板与工具脚本
+├── resources/            # 共享资源（图片、参考资料）
+├── slides/               # Slidev 幻灯片源码（主题：coding-agents-intro）
+├── src/                  # Python 包源码（code_them_all）
+├── talks/                # 演讲稿、大纲与 Q&A
+├── tutorials/            # 长篇教程文档
+├── AGENTS.md             # AI 代理相关文档
+├── CLAUDE.md             # Claude Code 项目开发指引
+├── README.md             # 项目说明文档
+├── normalize-line-endings.sh  # 行尾统一化脚本
+├── setup-envs.sh         # 环境初始化脚本
+├── start-slidev.sh       # Slidev 本地预览启动脚本
+├── package.json          # Node.js 项目配置（Slidev 相关）
+├── package-lock.json     # Node.js 依赖锁定文件
+└── pyproject.toml        # Python 项目配置
 ```
-
-说明：
-- `slides/`：Slidev 幻灯片源码与资产；`slides/coding-agents-intro/` 为本主题，入口在 `main/index.md`。
-- `.github/workflows/`：GitHub Pages 自动发布工作流（push 到 `main` 即发布）。
-- `start-slidev.sh`：本地预览便捷脚本（支持多主题/端口参数）。
-- `context/`：规格、提示、计划、角色等资料库，用于组织与沉淀方法论。
-- `.specify/`：SpecKit 相关脚本与缓存，支撑“规范驱动开发”的流程。
-- `magic-context/`：外部上下文与脚本集合（子仓库/子模块风格，用于复用）。
-- `src/`：Python 包示例位置（若有 Python 代码）。
-- `resources/`、`examples/`、`talks/`、`tutorials/`：资源、示例、演讲稿与教程文档。
-- `package.json`：包含 Slidev 的开发/构建脚本；`pyproject.toml`、`pixi.lock` 为 Python/Pixi 清单。
-- `normalize-line-endings.sh`：统一行尾脚本；跨平台规范见 `.github/LINE_ENDINGS.md`。
 
 ## 跨平台与行尾规范
 
@@ -131,21 +86,4 @@ coding-agent-for-everything/
 git config --local core.autocrlf input
 git config --local core.eol lf
 ```
-更多细节见 `.gitattributes` 与 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)。
-- 希望提高工作效率的任何人
-
-## 参与贡献
-
-欢迎贡献教程、案例研究、最佳实践和使用技巧！
-
-## 语言说明
-
-本项目主要使用**中文**编写所有文档、教程和幻灯片，面向中文用户群体。
-
-## 许可证
-
-待定
-
-## 联系方式
-
-如有问题或建议，请提交 Issue 或 Pull Request。
+更多细节见 `.gitattributes` 与 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)
