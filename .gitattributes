@@ -1,2 +1,54 @@
 # SCM syntax highlighting & preventing 3-way merges
 pixi.lock merge=binary linguist-language=YAML linguist-generated=true
+
+# Line ending normalization
+# Auto-detect text files and normalize line endings to LF in the repository
+* text=auto
+
+# Explicitly declare text files that should always use LF
+*.py text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.vue text eol=lf
+*.txt text eol=lf
+
+# Shell scripts must use LF (required for Unix-like systems)
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Windows-specific files that should use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files (explicitly mark as binary to prevent line ending conversion)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.pyc binary
+*.pyo binary
+*.dll binary
+*.so binary
+*.dylib binary

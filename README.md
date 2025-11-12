@@ -31,11 +31,21 @@ coding-agent-for-everything/
 ## 开发与运行
 
 - 语言栈：Python 与 TypeScript/JavaScript。
-- Python 环境由 Pixi 管理，请使用 `pixi run` 执行所有 Python 脚本，避免使用系统 `python`。
+- Python 环境由 Pixi 管理,请使用 `pixi run` 执行所有 Python 脚本，避免使用系统 `python`。
 - 示例：
   - `pixi run python -c "print('hello')"`
   - `pixi run python -m code_them_all`（如项目内提供相应入口）
 - TypeScript/JavaScript 相关内容请按各子目录的 README 说明运行。
+
+### 跨平台开发注意事项
+
+本项目已配置 Git 以正确处理 Windows/Linux 行尾符差异。详见 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)。
+
+首次克隆后建议运行：
+```bash
+git config --local core.autocrlf input
+git config --local core.eol lf
+```
 
 ### 目录约定
 

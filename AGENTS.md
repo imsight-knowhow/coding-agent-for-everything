@@ -44,3 +44,18 @@
 - 禁止提交真实密钥；使用 `<API_KEY>` 等占位符。
 - 根目录仅放置清单（`pyproject.toml`、`package.json`、`pixi.lock` 等）；Slidev 代码与产物全部在 `slides/` 下，避免污染根空间。
 
+## 跨平台开发
+
+本项目支持 Windows 和 Linux 环境。Git 已配置行尾符规范化（`.gitattributes`）：
+- 所有文本文件在仓库中使用 LF
+- Shell 脚本（`.sh`）强制 LF
+- Windows 脚本（`.bat`, `.cmd`, `.ps1`）使用 CRLF
+
+首次克隆后执行：
+```bash
+git config --local core.autocrlf input
+git config --local core.eol lf
+```
+
+更新 `.gitattributes` 后运行 `./normalize-line-endings.sh` 规范化现有文件。详见 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)。
+
