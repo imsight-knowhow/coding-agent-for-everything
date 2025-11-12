@@ -1,117 +1,73 @@
-# 编码代理完全指南
+# 编码代理·主题幻灯片（Slidev）
 
-> 最大化利用 AI 编码代理提升工作效率的教程、演讲和幻灯片
+[在线预览（GitHub Pages）](https://imsight-knowhow.github.io/coding-agent-for-everything/)
 
-## 项目简介
+## 概要
 
-本项目旨在提供全面的教程、演讲材料和幻灯片，帮助开发者和非技术人员最大化利用各种编码代理（Coding Agents）来提高日常工作效率。
+本仓库包含主题为“编码代理（Coding Agents）”的演讲幻灯片，聚焦如何借助终端/IDE 里的智能代理提升编码与知识工作的效率。内容涵盖：
 
-## 支持的编码代理
+- 发展脉络：从 Chatbot → Copilot → Cursor → Cline → 终端编码代理（Codex CLI / Claude Code）
+- 个人观点与 Human‑in‑the‑loop：人与代理的职责分工与反馈闭环
+- 新范式：规范驱动开发（SpecKit、OpenSpec）的工作方式与产物
+- 应用示例：专利写作、旅行规划、论文综述、工程任务等
+- 过往项目回顾：基于代理完成的实践仓库与包
 
-本项目涵盖以下主流编码代理工具：
+对应源码位于 `slides/coding-agents-intro/main/index.md`（通过 `src:` 聚合子页面）。
 
-- **Claude Code** - Anthropic 的命令行 AI 编程助手
-- **GitHub Copilot** - GitHub 的 AI 代码补全工具
-- **Cline** - 自主编码代理
-- **Codex** - OpenAI 的代码生成模型
-- 以及其他新兴的 AI 编码工具
+## 技术栈
 
-## 项目结构
+- Slidev（基于 Vite + Vue 3）
+- 默认主题 `@slidev/theme-default`
+- Mermaid 图表（内置支持）
+- Node.js ≥ 18（见 `package.json`）
 
+## 本地运行
+
+1) 安装依赖（首次）
+```bash
+npm install
 ```
-coding-agent-for-everything/
-├── tutorials/          # 详细教程文档
-├── slides/            # 演讲幻灯片
-├── talks/             # 演讲材料和脚本
-├── examples/          # 示例代码和实践案例
-├── resources/         # 额外资源和参考材料
-└── README.md          # 项目说明文档
+
+2) 启动本地预览（任意其一）
+```bash
+# 使用 npm 脚本
+npm run slides:dev:intro
+
+# 或直接调用 Slidev 指定入口
+npx slidev slides/coding-agents-intro/main/index.md
+
+# 或使用脚本（支持多主题/端口参数）
+./start-slidev.sh
 ```
 
-## 开发与运行
+3) 打开浏览器：`http://localhost:3030/`（或终端提示的端口）。
 
-- 语言栈：Python 与 TypeScript/JavaScript。
-- Python 环境由 Pixi 管理,请使用 `pixi run` 执行所有 Python 脚本，避免使用系统 `python`。
-- 示例：
-  - `pixi run python -c "print('hello')"`
-  - `pixi run python -m code_them_all`（如项目内提供相应入口）
-- TypeScript/JavaScript 相关内容请按各子目录的 README 说明运行。
+## 构建与发布
 
-### 跨平台开发注意事项
+- 本地构建
+```bash
+npm run slides:build:intro
+# 产物输出：slides/coding-agents-intro/dist
+```
 
-本项目已配置 Git 以正确处理 Windows/Linux 行尾符差异。详见 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)。
+- GitHub Pages
+  - 已配置工作流 `.github/workflows/deploy.yml`，推送到 `main` 自动发布
+  - 线上地址：`https://imsight-knowhow.github.io/coding-agent-for-everything/`
 
-首次克隆后建议运行：
+## 相关目录
+
+- `slides/` 幻灯片源码与静态资源
+- `slides/coding-agents-intro/main/` 主题入口与各分节 Markdown
+- `slides/coding-agents-intro/public/` 公开静态资源（如 GIF）
+
+## 跨平台与行尾规范
+
+建议在首次克隆后执行：
 ```bash
 git config --local core.autocrlf input
 git config --local core.eol lf
 ```
-
-### 目录约定
-
-- `src/` 仅用于 Python 包源码（例如 `src/code_them_all`）；TS/JS（含 Slidev）不得使用该目录。
-- 根目录用于集中清单与脚本（如 `pyproject.toml`、`package.json`、`pixi.lock`），避免在根放置幻灯片源码与构建产物。
-- 幻灯片源码与资产放在 `slides/` 下；构建产物建议输出到 `slides/<topic>/dist` 或集中到 `slides/dist`。
-
-### Slidev 幻灯片组织（多 deck）
-
-- 采用“每个主题一个子目录 + 该主题内多入口 Markdown（Option 1）”的方式组织。
-- 推荐布局（占位名示例）：
-  ```
-  slides/
-    <topic-a>/
-      main/
-        index.md        # 聚合入口（通过 src 引入各分节）
-        intro.md
-        advanced.md
-      components/
-      public/
-      dist/
-    <topic-b>/
-      main/
-        index.md
-        overview.md
-        deep-dive.md
-      components/
-      public/
-      dist/
-  ```
-- 预览与构建（Node ≥ 18）：
-  - 预览（推荐聚合入口）：`npx slidev slides/<topic-a>/main/index.md`
-  - 预览（仓库示例）：`npm run slides:dev:intro`
-  - 构建该主题全部入口：`npx slidev build 'slides/<topic-a>/main/*.md' --out slides/<topic-a>/dist`
-- 详见：`context/hints/slidev-kb/howto-organize-multiple-decks-in-slidev.md`
-
-### 预览 Slidev 幻灯片（快速上手）
-
-1) 安装依赖（首次执行）：`npm install`
-2) 预览示例主题：`npm run slides:dev:intro`
-3) 打开浏览器访问：`http://localhost:3030/`（或终端提示的链接）。
-   - 常用快捷键：`o` 打开、`r` 重启、`q` 退出；演讲者视图：`/presenter`。
-
-## 内容范围
-
-### 软件开发场景
-- 代码生成与自动补全
-- 代码审查与重构
-- 测试用例编写
-- 文档生成
-- Bug 修复
-- 性能优化
-
-### 非开发场景
-- 数据分析与处理
-- 脚本自动化
-- 文档编写与整理
-- 工作流优化
-- 学习新技术
-
-## 目标受众
-
-- 软件工程师
-- 产品经理
-- 数据分析师
-- 技术写作者
+更多细节见 `.gitattributes` 与 [.github/LINE_ENDINGS.md](.github/LINE_ENDINGS.md)。
 - 希望提高工作效率的任何人
 
 ## 参与贡献
