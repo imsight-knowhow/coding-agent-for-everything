@@ -41,7 +41,8 @@ jobs:
           echo "Using base: $BASE"
           npx slidev build slides/coding-agents-intro/main/index.md \
             --base "$BASE" \
-            --out slides/coding-agents-intro/dist
+            --out dist
+          echo "Built files:" && ls -la dist | sed -n '1,200p'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -49,7 +50,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: slides/coding-agents-intro/dist
+          path: dist
 
   deploy:
     environment:
@@ -61,4 +62,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
